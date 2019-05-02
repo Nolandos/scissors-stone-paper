@@ -1,0 +1,45 @@
+.game-container {
+    display: none;
+    background-color: #ced6e0;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+
+    &.show{
+        display:flex;
+    }
+
+    .player-info {
+        border: 7px solid #ff4757;
+        background-color: #70a1ff;
+        width: 70%;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 25px;
+        border-radius: 5px;
+
+        .player-name {
+            font-family: 'ZCOOL KuaiLe', cursive; 
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            &::before {
+                content: 'Nazwa Gracza: ';
+                font-weight: normal;
+                color: #000;
+            }
+        }
+
+        .game-scores {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            &::before {
+                content: 'Ilość kolejek: ';
+                font-weight: normal;
+                color: #000;
+            }
+        }
+    }
+} 

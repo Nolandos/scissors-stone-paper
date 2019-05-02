@@ -6,7 +6,9 @@ class newGame {
     }
 
     addListeners() {
-        
+        document.querySelector('#game-container').classList.add('show');
+        document.querySelector('#player-name').innerHTML = this.name;
+        document.querySelector('#game-scores').innerHTML = this.totalScore;
     }
     
 }
@@ -32,6 +34,10 @@ document.querySelector('#btn-start-game').addEventListener('click', (e) => {
     modalOverlay.classList.remove('show');
     modalStartGame.classList.remove('show');
 
-
+    window.scroll({
+        top: 2500, 
+        left: 0, 
+        behavior: 'smooth'
+    });
 });
 

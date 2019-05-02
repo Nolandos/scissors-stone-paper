@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe");
 .btn {
   padding: 40px;
@@ -165,6 +166,59 @@ input:focus {
       justify-content: center;
 }
 
+.game-container {
+  display: none;
+  background-color: #ced6e0;
+  height: 100vh;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.game-container.show {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.game-container .player-info {
+  border: 7px solid #ff4757;
+  background-color: #70a1ff;
+  width: 70%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 25px;
+  border-radius: 5px;
+}
+
+.game-container .player-info .player-name {
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+}
+
+.game-container .player-info .player-name::before {
+  content: 'Nazwa Gracza: ';
+  font-weight: normal;
+  color: #000;
+}
+
+.game-container .player-info .game-scores {
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+}
+
+.game-container .player-info .game-scores::before {
+  content: 'Ilość kolejek: ';
+  font-weight: normal;
+  color: #000;
+}
+
 body {
   display: -ms-flexbox;
   display: flex;
@@ -175,6 +229,5 @@ body {
 
 body .container {
   width: 100%;
-  height: 1500px;
 }
 /*# sourceMappingURL=style.css.map */
