@@ -219,6 +219,91 @@ input:focus {
   color: #000;
 }
 
+.game-container .options-container {
+  width: 40%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  margin-top: 50px;
+}
+
+.star8 {
+  display: inline-block;
+  margin: 2em;
+  transform: rotate(22deg);
+  transition: background linear .3s;
+}
+
+.star8::before {
+  background-color: #fff;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  transform: rotate(45deg);
+}
+
+.star8,
+.star8::before,
+a.fa {
+  width: 80px;
+  height: 80px;
+}
+
+.gold,
+.gold::before {
+  border: 6px solid #ffc107;
+}
+
+.orange,
+.orange::before {
+  border: 6px solid #fd7e33;
+}
+
+.blue,
+.blue::before {
+  border: 6px solid #3fb0ac;
+}
+
+a.fa {
+  margin: 0;
+  position: absolute;
+  background-color: #fff;
+  font-size: 60px;
+  cursor: pointer;
+}
+
+a.fa::before {
+  transform: rotate(-22deg);
+  position: absolute;
+  margin: 10px;
+}
+
+.gold:hover::before,
+.gold:hover,
+.gold:hover a.fa {
+  background-color: #ffc107;
+  color: #fff;
+  transition: ease-in-out .3s;
+}
+
+.orange:hover::before,
+.orange:hover,
+.orange:hover a.fa {
+  background-color: #fd7e33;
+  color: #fff;
+  transition: ease-in-out .3s;
+}
+
+.blue:hover::before,
+.blue:hover,
+.blue:hover a.fa {
+  background-color: #3fb0ac;
+  color: #fff;
+  transition: ease-in-out .3s;
+}
+
 body {
   display: -ms-flexbox;
   display: flex;
