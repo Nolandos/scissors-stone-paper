@@ -50,19 +50,26 @@ class newGame {
 
 
         if(computerChoice === playerChoice) {
-          return `Komputer wylosował ${computerChoice} jest: &nbsp <b>Remis</b> `; 
+        this.addToTable(computerChoice, playerChoice, 'REMIS');  
+          return `REMIS`; 
         }        
         if(computerChoice === 'KAMIEŃ' && playerChoice === 'PAPIER') {
+            this.addToTable(computerChoice, playerChoice, 'WYGRANA');
             return `WYGRANA`;
         } else if(computerChoice === 'NOŻYCE' && playerChoice === 'PAPIER') {
+            this.addToTable(computerChoice, playerChoice, 'PRZEGRANA');
             return `PRZEGRANA`;
         } else if(computerChoice === 'PAPIER' && playerChoice === 'KAMIEŃ') {
+            this.addToTable(computerChoice, playerChoice, `PRZEGRANA`);
             return `PRZEGRANA`;
         } else if(computerChoice === 'NOŻYCE' && playerChoice === 'KAMIEŃ') {
+            this.addToTable(computerChoice, playerChoice,`WYGRANA`);
             return `WYGRANA`;
         } else if(computerChoice === 'PAPIER' && playerChoice === 'NOŻYCE') {
+            this.addToTable(computerChoice, playerChoice, `WYGRANA`);
             return `WYGRANA`;
         } else if(computerChoice === 'KAMIEŃ' && playerChoice === 'NOŻYCE') {
+            this.addToTable(computerChoice, playerChoice, `PRZEGRANA`);
             return `PRZEGRANA`;
         }
     }
@@ -82,6 +89,20 @@ class newGame {
     updateScore(){
         document.querySelector('.player-score').innerHTML = this.playerPoints;
         document.querySelector('.computer-score').innerHTML = this.computerPoints;
+    }
+
+    addToTable(computerChoice, playerChoice, result) {
+        let table = document.querySelector('#score-table');
+
+        let row = document.createElement('tr');
+        
+        row.innerHTML = `
+        <td>${computerChoice}</td>
+        <td>${playerChoice}</td> 
+        <td>${result}</td>
+        `;
+
+        table.appendChild(row);
     }
 
     

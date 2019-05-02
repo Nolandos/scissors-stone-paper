@@ -169,7 +169,7 @@ input:focus {
 .game-container {
   display: none;
   background-color: #ced6e0;
-  height: 100vh;
+  min-height: 100vh;
   -ms-flex-direction: column;
       flex-direction: column;
   -ms-flex-align: center;
@@ -226,6 +226,42 @@ input:focus {
   -ms-flex-pack: justify;
       justify-content: space-between;
   margin-top: 50px;
+}
+
+.game-container .score {
+  margin-top: 50px;
+  border: 7px solid green;
+  padding: 15px 0;
+  border-radius: 3px;
+  width: 40%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.game-container .score .player-score {
+  font-size: 2em;
+  color: #ff6348;
+  font-weight: bold;
+}
+
+.game-container .score .player-score::before {
+  content: 'Gracz: ';
+  color: #000;
+  font-weight: normal;
+}
+
+.game-container .score .computer-score {
+  font-size: 2em;
+  color: #ff6348;
+  font-weight: bold;
+}
+
+.game-container .score .computer-score::before {
+  content: 'Komputer: ';
+  color: #000;
+  font-weight: normal;
 }
 
 .star8 {
@@ -304,12 +340,27 @@ a.fa::before {
   transition: ease-in-out .3s;
 }
 
+table, th, td {
+  border: 5px solid #ffa502;
+  border-collapse: collapse;
+}
+
+.score-table {
+  font-size: 1.5em;
+  margin: 50px 0;
+}
+
+.score-table th, .score-table td {
+  padding: 10px 45px;
+}
+
 body {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
       justify-content: center;
   margin: 0;
+  font-family: 'ZCOOL KuaiLe', cursive;
 }
 
 body .container {
