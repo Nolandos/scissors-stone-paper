@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Scissors Stone Paper Game</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+       
+    </head>
+	<body>
+        <div class="overlay" id="modal-overlay">
+            <div class="modal" id="modal-start-game">
+                <a href="#" class="close">x</a>
+                <header>Nowa gra</header>
+                <div class="content">
+                    <form class="new-game-form">
+                        <input type="text" class="name" id="name" placeholder="Nazwa gracza" required>
+                        <input type="number" class="total-score" id="total-score" placeholder="Ilość gier" min=0 required>
+                        <button type="submit" class="btn-start-game" id="btn-start-game">Rozpocznij !</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+        <section class="jumbotron">
+            <header class="jumbotron-header">
+                <h1 class="title">Papier Nożyce Kamień</h1> 
+                <p class="text">Podejmij wyzwanie !</p>
+            </header>
+            <button class="btn btn-new-game" id="btn-new-game">Nowa Gra</button>
+        </section>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>

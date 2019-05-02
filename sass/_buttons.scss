@@ -1,0 +1,22 @@
+.btn {
+    padding: 40px;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    border-radius: 50%; 
+    color: #fff;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    cursor:pointer;
+    outline: none;
+
+    &:hover {
+        background-color: #7bed9f;
+    }
+}
+
+.btn-new-game {
+    border: 5px solid #2ed573;
+    background-color: #2ed573;
+    width: 150px;
+    height: 150px;
+}
