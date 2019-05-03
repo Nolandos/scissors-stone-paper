@@ -192,6 +192,7 @@ input:focus {
 
 .overlay .modal .result-game .result-table {
   font-size: 0.8em;
+  margin: 0 15px;
 }
 
 .overlay .modal .result-game .result-table th, .overlay .modal .result-game .result-table td {

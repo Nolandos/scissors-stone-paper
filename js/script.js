@@ -55,25 +55,38 @@ class newGame {
 
 
         if(computerChoice === playerChoice) {
-        this.addToTable(computerChoice, playerChoice, 'REMIS');  
-          return `REMIS`; 
+            this.rounds++;
+            this.addToTable(computerChoice, playerChoice, 'REMIS');  
+            return `REMIS`; 
         }        
         if(computerChoice === 'KAMIEŃ' && playerChoice === 'PAPIER') {
+            this.playerPoints++;
+            this.rounds++;
             this.addToTable(computerChoice, playerChoice, 'WYGRANA');
             return `WYGRANA`;
         } else if(computerChoice === 'NOŻYCE' && playerChoice === 'PAPIER') {
+            this.computerPoints++;
+            this.rounds++;
             this.addToTable(computerChoice, playerChoice, 'PRZEGRANA');
             return `PRZEGRANA`;
         } else if(computerChoice === 'PAPIER' && playerChoice === 'KAMIEŃ') {
+            this.computerPoints++;
+            this.rounds++;
             this.addToTable(computerChoice, playerChoice, `PRZEGRANA`);
             return `PRZEGRANA`;
         } else if(computerChoice === 'NOŻYCE' && playerChoice === 'KAMIEŃ') {
+            this.playerPoints++;
+            this.rounds++;
             this.addToTable(computerChoice, playerChoice,`WYGRANA`);
             return `WYGRANA`;
         } else if(computerChoice === 'PAPIER' && playerChoice === 'NOŻYCE') {
+            this.playerPoints++;
+            this.rounds++;
             this.addToTable(computerChoice, playerChoice, `WYGRANA`);
             return `WYGRANA`;
         } else if(computerChoice === 'KAMIEŃ' && playerChoice === 'NOŻYCE') {
+            this.computerPoints++;
+            this.rounds++;
             this.addToTable(computerChoice, playerChoice, `PRZEGRANA`);
             return `PRZEGRANA`;
         }
@@ -81,22 +94,17 @@ class newGame {
 
     andDo(result) {
         if(result === `WYGRANA`) {
-            this.playerPoints++;
-            this.rounds++;
             this.updateScore();
             this.finalResult();
         }  
         
         if (result === `PRZEGRANA`) {
-            this.computerPoints++;
-            this.rounds++;
             this.updateScore();
             this.finalResult();
             
         }
 
         if (result === `REMIS`) {    
-            this.rounds++;
             this.finalResult();
         }
     }
@@ -112,9 +120,11 @@ class newGame {
         let row = document.createElement('tr');
         
         row.innerHTML = `
+        <td>${this.rounds}</td>
         <td>${computerChoice}</td>
         <td>${playerChoice}</td> 
         <td>${result}</td>
+        <td>${this.playerPoints} - ${this.computerPoints}</td>
         `;
 
         table.appendChild(row);
@@ -139,11 +149,13 @@ class newGame {
 
             let resultTable = document.querySelector('#result-table');
             let row = document.createElement('tr');
-
+            let draw = this.rounds - (this.playerPoints + this.computerPoints );
+            
             row.innerHTML = `
             <td>${this.rounds}</td>
             <td>${this.playerPoints}</td> 
             <td>${this.computerPoints}</td>
+            <td>${draw}</td>
             `;
 
             resultTable.appendChild(row);
