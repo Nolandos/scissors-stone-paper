@@ -2,6 +2,7 @@ class newGame {
     constructor(name, totalScore) {
         this.name = name
         this.totalScore = totalScore
+        this.rounds = 0
         this.playerPoints = 0
         this.computerPoints = 0 
         this.run()
@@ -24,13 +25,17 @@ class newGame {
 
         document.querySelector('#scissors').addEventListener('click', (e) => {
             let result = this.checkResult('NOŻYCE'); 
-            this.andDo(result); 
+            this.andDo(result);
         });
 
         document.querySelector('#rock').addEventListener('click', (e) => {
             let result = this.checkResult('KAMIEŃ'); 
             this.andDo(result);
         });
+
+        document.querySelector('#exit-game').addEventListener('click', (e) => {
+            location.reload();
+        })
     }
 
     choiceAi () {
@@ -77,16 +82,26 @@ class newGame {
     andDo(result) {
         if(result === `WYGRANA`) {
             this.playerPoints++;
+            this.rounds++;
             this.updateScore();
+            this.finalResult();
         }  
         
         if (result === `PRZEGRANA`) {
             this.computerPoints++;
+            this.rounds++;
             this.updateScore();
+            this.finalResult();
+            
+        }
+
+        if (result === `REMIS`) {    
+            this.rounds++;
+            this.finalResult();
         }
     }
 
-    updateScore(){
+    updateScore() {
         document.querySelector('.player-score').innerHTML = this.playerPoints;
         document.querySelector('.computer-score').innerHTML = this.computerPoints;
     }
@@ -105,6 +120,37 @@ class newGame {
         table.appendChild(row);
     }
 
+    finalResult() {
+        console.log(this.rounds);
+        console.log(this.totalScore);
+        if(this.playerPoints >= this.totalScore || this.computerPoints >= this.totalScore ) {
+            document.querySelector('#modal-overlay').classList.add('show');
+            document.querySelector('#modal-end-game').classList.add('show');
+
+            if(this.playerPoints >= this.totalScore) {
+                document.querySelector('.result-name').classList.add('win');
+                document.querySelector('.result-name').innerHTML = `WYGRAŁEŚ`;
+            }
+
+            if(this.computerPoints >= this.totalScore) {
+                document.querySelector('.result-name').classList.add('lose');
+                document.querySelector('.result-name').innerHTML = `PRZEGRAŁEŚ`;
+            }
+
+            let resultTable = document.querySelector('#result-table');
+            let row = document.createElement('tr');
+
+            row.innerHTML = `
+            <td>${this.rounds}</td>
+            <td>${this.playerPoints}</td> 
+            <td>${this.computerPoints}</td>
+            `;
+
+            resultTable.appendChild(row);
+
+        }
+    }
+
     
 }
 
@@ -117,13 +163,14 @@ document.querySelector('#btn-new-game').addEventListener('click', (e) => {
 });
 
 document.querySelector('#btn-start-game').addEventListener('click', (e) => { 
+    
     e.preventDefault();
     let modalOverlay = document.querySelector('#modal-overlay');
     let modalStartGame = document.querySelector('#modal-start-game');
 
     let totalScore = document.querySelector('#total-score').value;
     let name = document.querySelector('#name').value;
-
+   
     new newGame(name, totalScore);
 
     modalOverlay.classList.remove('show');
@@ -134,5 +181,12 @@ document.querySelector('#btn-start-game').addEventListener('click', (e) => {
         left: 0, 
         behavior: 'smooth'
     });
+});
+
+document.querySelector('.overlay').addEventListener('click', (e) => {
+    if(e.target.classList.contains('close')) {
+        e.target.parentElement.classList.remove('show');
+        document.querySelector('#modal-overlay').classList.remove('show');
+    }
 });
 

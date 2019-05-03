@@ -86,6 +86,7 @@ input:focus {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
 }
 
 .overlay.show {
@@ -96,7 +97,7 @@ input:focus {
   display: none;
   background: #fff;
   width: 30%;
-  height: 250px;
+  min-height: 300px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -164,6 +165,53 @@ input:focus {
   width: 40%;
   -ms-flex-pack: center;
       justify-content: center;
+}
+
+.overlay .modal .result-game {
+  margin-top: 15px;
+  font-size: 2em;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.overlay .modal .result-game .result-name.win {
+  color: #2ed573;
+}
+
+.overlay .modal .result-game .result-name.lose {
+  color: #ff4757;
+}
+
+.overlay .modal .result-game table, .overlay .modal .result-game th, .overlay .modal .result-game td {
+  border: 2px solid #ffa502;
+}
+
+.overlay .modal .result-game .result-table {
+  font-size: 0.8em;
+}
+
+.overlay .modal .result-game .result-table th, .overlay .modal .result-game .result-table td {
+  padding: 2px 5px;
+}
+
+.overlay .modal .exit-game {
+  padding: 10px 20px;
+  margin: 15px 0;
+  border: 5px solid #ff4757;
+  outline: none;
+  background-color: #fff;
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.overlay .modal .exit-game:hover {
+  background-color: #ff4757;
+  color: #fff;
 }
 
 .game-container {

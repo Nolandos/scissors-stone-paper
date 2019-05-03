@@ -1,18 +1,18 @@
 @import "variables";                                     
 @import "fonts";      
 @import "buttons";                                            
-@import "inputs";                                     
+@import "inputs";                                                
     
 /* Components*/ 
  
 @import "components/jumbotron";
 @import "components/modals";
 @import "components/gameContainer"; 
-@import "components/stars";                                   
+@import "components/stars";                                                    
 @import "components/table"; 
 
 body {
-    display: flex; 
+    display: flex;   
     justify-content: center;
     margin: 0;    
     font-family: 'ZCOOL KuaiLe', cursive;
