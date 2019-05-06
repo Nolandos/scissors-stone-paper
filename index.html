@@ -6,75 +6,11 @@
         <title>Scissors Stone Paper Game</title>
         <link rel="stylesheet" type="text/css" href="vendor/css/fontello.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        
        
     </head>
 	<body>
-        <div class="overlay" id="modal-overlay">
-            <div class="modal" id="modal-start-game">
-                <a href="#" class="close">x</a>
-                <header>Nowa gra</header>
-                <div class="content">
-                    <form class="new-game-form">
-                        <input type="text" class="name" id="name" placeholder="Nazwa gracza" required>
-                        <input type="number" class="total-score" id="total-score" placeholder="Ilość gier" min=0 required>
-                        <button type="submit" class="btn-start-game" id="btn-start-game">Rozpocznij !</button>
-                    </form>
-                </div>
-            </div>
-            <div class="modal" id="modal-end-game">
-                <header>Koniec Gry</header>
-                <div class="content">
-                    <div class="result-game" id="result-game">
-                        <p class="result-name" id="result-name"></p>
-                        <table class="result-table" id="result-table">
-                            <tr>
-                                <th>Ilość rund</th>
-                                <th>Wygrane rundy</th>
-                                <th>Przegrane rundy</th> 
-                                <th>Remisy</th> 
-                            </tr>
-                        </table>
-                        <button class="exit-game" id="exit-game">Wyjście</button>
-                    </div>  
-                </div>
-                                
-            </div>
-        </div>
-        <div class="container">
-        <section class="jumbotron">
-            <header class="jumbotron-header">
-                <h1 class="title">Papier Nożyce Kamień</h1> 
-                <p class="text">Podejmij wyzwanie !</p>
-            </header>
-            <button class="btn btn-new-game" id="btn-new-game">Nowa Gra</button>
-        </section>
-
-        <section class="game-container" id="game-container">
-            <div class="player-info">
-                <p class="player-name" id="player-name"></p>
-                <p class="game-scores" id="game-scores"></p>
-            </div>
-            <div class="options-container">
-                <div class="star8 gold"><a class="fa icon-hand-paper-o" id="paper"></a></div>    
-                <div class="star8 orange"><a class="fa icon-hand-scissors-o" id="scissors"></a></div>
-                <div class="star8 blue"><a class="fa icon-hand-grab-o" id="rock"></a></div>
-            </div>
-            <div class="score">
-                <div class="player-score"></div>
-                <div class="computer-score"></div>
-            </div>
-            <table class="score-table" id="score-table">
-                <tr>
-                    <th>Runda</th>
-                    <th>Komputer Wylosował:</th>
-                    <th>Gracz Wylosował</th> 
-                    <th>Wynik starcia</th>
-                    <th>Wynik ogólny</th>
-                </tr>
-            </table>
-            
-        </section>
-        </div>
+        <div class="main" id="main"></div>
         <script type="text/javascript" src="js/script.js"></script>
 	</body>
 </html>

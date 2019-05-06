@@ -41,7 +41,7 @@ input:focus {
 .jumbotron {
   width: 100%;
   height: 100vh;
-  background-image: url("../images/jumbotron.jpeg");
+  background-image: url("/images/jumbotron.jpeg");
   background-position: center;
   background-size: cover;
   display: -ms-flexbox;
@@ -410,6 +410,10 @@ body {
       justify-content: center;
   margin: 0;
   font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+body .main {
+  width: 100%;
 }
 
 body .container {

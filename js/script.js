@@ -1,43 +1,89 @@
+
+/*FUNCTION "andDo" -  EXECUTING FUNCTION "updateScore" AND "finalResult" based on result duel*/
+
 class newGame {
-    constructor(name, totalScore) {
-        this.name = name
-        this.totalScore = totalScore
+    constructor(selector) {
+        this.selector = selector;
+        this.render()
+        this.name
+        this.totalScore 
         this.rounds = 0
         this.playerPoints = 0
         this.computerPoints = 0 
-        this.run()
         this.addListeners()
-        this.updateScore() 
-        
+        this.updateScore()      
     }
 
+    /*FUNCTION RUN GAME*/
     run() {
-        document.querySelector('#game-container').classList.add('show');
-        document.querySelector('#player-name').innerHTML = this.name;
-        document.querySelector('#game-scores').innerHTML = this.totalScore;
+        document.querySelector('#game-container').classList.add('show');                    
+        document.querySelector('#player-name').innerHTML = this.name;                       
+        document.querySelector('#game-scores').innerHTML = this.totalScore;                 
     }
 
-    addListeners() {
-        document.querySelector('#paper').addEventListener('click', (e) => {
-            let result = this.checkResult('PAPIER');
-            this.andDo(result);
+    /*FUNCTION ADD LISTENERS*/
+    addListeners() {                                                                            
+
+        /*ADD LISTENERS FOR BUTTONS PAPER, SCISSORS AND ROCK*/
+        let choiceButtons = document.querySelectorAll('.choice-buttons');
+
+        for(let i=0; i<choiceButtons.length; i++) {
+            console.log(choiceButtons[i].id);
+            choiceButtons[i].addEventListener('click', (e) => {
+                let result = this.checkResult(choiceButtons[i].id);
+                this.andDo(result);
+            });
+        }
+
+        /*FUNCTION FOR NEW GAME*/
+        document.querySelector('#btn-new-game').addEventListener('click', (e) => {
+            let modalOverlay = document.querySelector('#modal-overlay');
+            let modalStartGame = document.querySelector('#modal-start-game');
+        
+            modalOverlay.classList.add('show');
+            modalStartGame.classList.add('show');
         });
 
-        document.querySelector('#scissors').addEventListener('click', (e) => {
-            let result = this.checkResult('NOŻYCE'); 
-            this.andDo(result);
+        
+        /*FUNCTION FOR START GAME BUTTON */
+        document.querySelector('#btn-start-game').addEventListener('click', (e) => { 
+    
+            e.preventDefault();
+
+            let modalOverlay = document.querySelector('#modal-overlay');
+            let modalStartGame = document.querySelector('#modal-start-game');
+        
+            this.totalScore = document.querySelector('#total-score').value;
+            this.name = document.querySelector('#name').value;
+           
+            
+            this.run();
+            modalOverlay.classList.remove('show');
+            modalStartGame.classList.remove('show');
+        
+            window.scroll({
+                top: 2500, 
+                left: 0, 
+                behavior: 'smooth'
+            });
         });
 
-        document.querySelector('#rock').addEventListener('click', (e) => {
-            let result = this.checkResult('KAMIEŃ'); 
-            this.andDo(result);
+        /*FUNCTION FOR CLOSE BUTTON*/
+        document.querySelector('.overlay').addEventListener('click', (e) => {
+            if(e.target.classList.contains('close')) {
+                e.target.parentElement.classList.remove('show');
+                document.querySelector('#modal-overlay').classList.remove('show');
+            }
         });
 
+        /*FUNCTION FOR CLOSE GAME BUTTON*/
         document.querySelector('#exit-game').addEventListener('click', (e) => {
-            location.reload();
-        })
+            new newGame(document.querySelector('#main'));
+        });
+
     }
 
+    /*FUNCTION RANDOMIZING FOR COMPUTER */
     choiceAi () {
         let result = Math.round(Math.random()*2 +1);
         
@@ -50,6 +96,7 @@ class newGame {
         }
     }
 
+    /*FUNCTION COMPARING CHOICE PLAYER AND COMPUTER*/
     checkResult(playerChoice) { 
         let computerChoice = this.choiceAi();
 
@@ -58,40 +105,22 @@ class newGame {
             this.rounds++;
             this.addToTable(computerChoice, playerChoice, 'REMIS');  
             return `REMIS`; 
-        }        
-        if(computerChoice === 'KAMIEŃ' && playerChoice === 'PAPIER') {
+        }  
+
+        if(computerChoice === 'KAMIEŃ' && playerChoice === 'PAPIER' || computerChoice === 'NOŻYCE' && playerChoice === 'KAMIEŃ' || computerChoice === 'PAPIER' && playerChoice === 'NOŻYCE' ) {
             this.playerPoints++;
             this.rounds++;
             this.addToTable(computerChoice, playerChoice, 'WYGRANA');
             return `WYGRANA`;
-        } else if(computerChoice === 'NOŻYCE' && playerChoice === 'PAPIER') {
+        } else if(computerChoice === 'NOŻYCE' && playerChoice === 'PAPIER' || computerChoice === 'PAPIER' && playerChoice === 'KAMIEŃ' || computerChoice === 'KAMIEŃ' && playerChoice === 'NOŻYCE' ) {
             this.computerPoints++;
             this.rounds++;
             this.addToTable(computerChoice, playerChoice, 'PRZEGRANA');
             return `PRZEGRANA`;
-        } else if(computerChoice === 'PAPIER' && playerChoice === 'KAMIEŃ') {
-            this.computerPoints++;
-            this.rounds++;
-            this.addToTable(computerChoice, playerChoice, `PRZEGRANA`);
-            return `PRZEGRANA`;
-        } else if(computerChoice === 'NOŻYCE' && playerChoice === 'KAMIEŃ') {
-            this.playerPoints++;
-            this.rounds++;
-            this.addToTable(computerChoice, playerChoice,`WYGRANA`);
-            return `WYGRANA`;
-        } else if(computerChoice === 'PAPIER' && playerChoice === 'NOŻYCE') {
-            this.playerPoints++;
-            this.rounds++;
-            this.addToTable(computerChoice, playerChoice, `WYGRANA`);
-            return `WYGRANA`;
-        } else if(computerChoice === 'KAMIEŃ' && playerChoice === 'NOŻYCE') {
-            this.computerPoints++;
-            this.rounds++;
-            this.addToTable(computerChoice, playerChoice, `PRZEGRANA`);
-            return `PRZEGRANA`;
-        }
+        } 
     }
 
+    /*FUNCTION "andDo" -  EXECUTING FUNCTION "updateScore" AND "finalResult" based on result duel*/
     andDo(result) {
         if(result === `WYGRANA`) {
             this.updateScore();
@@ -109,11 +138,13 @@ class newGame {
         }
     }
 
+    /*FUNCTION FOR UPDATE SCORE*/    
     updateScore() {
         document.querySelector('.player-score').innerHTML = this.playerPoints;
         document.querySelector('.computer-score').innerHTML = this.computerPoints;
     }
 
+    /*FUNCTION FOR ADD INFORMATION ABOUT DUEL*/
     addToTable(computerChoice, playerChoice, result) {
         let table = document.querySelector('#score-table');
 
@@ -130,9 +161,8 @@ class newGame {
         table.appendChild(row);
     }
 
+    /*FUNCTION CHECKING CURRENTLY RESULT BATTLE*/
     finalResult() {
-        console.log(this.rounds);
-        console.log(this.totalScore);
         if(this.playerPoints >= this.totalScore || this.computerPoints >= this.totalScore ) {
             document.querySelector('#modal-overlay').classList.add('show');
             document.querySelector('#modal-end-game').classList.add('show');
@@ -163,42 +193,78 @@ class newGame {
         }
     }
 
+    /*FUNCTION RENDER BASIC STRUCTURE APLICATION*/
+    render() {
+        this.selector.innerHTML = `
+        <div class="overlay" id="modal-overlay">
+            <div class="modal" id="modal-start-game">
+                <a href="#" class="close">x</a>
+                <header>Nowa gra</header>
+                <div class="content">
+                    <form class="new-game-form">
+                        <input type="text" class="name" id="name" placeholder="Nazwa gracza" required>
+                        <input type="number" class="total-score" id="total-score" placeholder="Ilość gier" min=0 required>
+                        <button type="submit" class="btn-start-game" id="btn-start-game">Rozpocznij !</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal" id="modal-end-game">
+                <header>Koniec Gry</header>
+                <div class="content">
+                    <div class="result-game" id="result-game">
+                        <p class="result-name" id="result-name"></p>
+                        <table class="result-table" id="result-table">
+                            <tr>
+                                <th>Ilość rund</th>
+                                <th>Wygrane rundy</th>
+                                <th>Przegrane rundy</th> 
+                                <th>Remisy</th> 
+                            </tr>
+                        </table>
+                        <button class="exit-game" id="exit-game">Wyjście</button>
+                    </div>  
+                </div>
+                                
+            </div>
+        </div>
+        <div class="container">
+        <section class="jumbotron">
+            <header class="jumbotron-header">
+                <h1 class="title">Papier Nożyce Kamień</h1> 
+                <p class="text">Podejmij wyzwanie !</p>
+            </header>
+            <button class="btn btn-new-game" id="btn-new-game">Nowa Gra</button>
+        </section>
+
+        <section class="game-container" id="game-container">
+            <div class="player-info">
+                <p class="player-name" id="player-name"></p>
+                <p class="game-scores" id="game-scores"></p>
+            </div>
+            <div class="options-container">
+                <div class="star8 gold"><a class="fa icon-hand-paper-o choice-buttons" id="PAPIER"></a></div>    
+                <div class="star8 orange"><a class="fa icon-hand-scissors-o choice-buttons" id="NOŻYCE"></a></div>
+                <div class="star8 blue"><a class="fa icon-hand-grab-o choice-buttons" id="KAMIEŃ"></a></div>
+            </div>
+            <div class="score">
+                <div class="player-score"></div>
+                <div class="computer-score"></div>
+            </div>
+            <table class="score-table" id="score-table">
+                <tr>
+                    <th>Runda</th>
+                    <th>Komputer Wylosował:</th>
+                    <th>Gracz Wylosował</th> 
+                    <th>Wynik starcia</th>
+                    <th>Wynik ogólny</th>
+                </tr>
+            </table>
+            
+        </section>
+        </div>
+        `;        
+    }
     
 }
 
-document.querySelector('#btn-new-game').addEventListener('click', (e) => {
-    let modalOverlay = document.querySelector('#modal-overlay');
-    let modalStartGame = document.querySelector('#modal-start-game');
-
-    modalOverlay.classList.add('show');
-    modalStartGame.classList.add('show');
-});
-
-document.querySelector('#btn-start-game').addEventListener('click', (e) => { 
-    
-    e.preventDefault();
-    let modalOverlay = document.querySelector('#modal-overlay');
-    let modalStartGame = document.querySelector('#modal-start-game');
-
-    let totalScore = document.querySelector('#total-score').value;
-    let name = document.querySelector('#name').value;
-   
-    new newGame(name, totalScore);
-
-    modalOverlay.classList.remove('show');
-    modalStartGame.classList.remove('show');
-
-    window.scroll({
-        top: 2500, 
-        left: 0, 
-        behavior: 'smooth'
-    });
-});
-
-document.querySelector('.overlay').addEventListener('click', (e) => {
-    if(e.target.classList.contains('close')) {
-        e.target.parentElement.classList.remove('show');
-        document.querySelector('#modal-overlay').classList.remove('show');
-    }
-});
-
+new newGame(document.querySelector('#main'));
